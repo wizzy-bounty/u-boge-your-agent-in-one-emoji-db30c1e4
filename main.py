@@ -1,14 +1,13 @@
 import os
-from pathlib import Path
 
-GLYPH = "🕷️"
+ENTRY = "🐙"
 
 
-def main() -> None:
-    out_dir = Path(os.environ.get("MAKEFUN_OUTPUT_DIR", "/output"))
-    out_dir.mkdir(parents=True, exist_ok=True)
-    target = out_dir / "entry.txt"
-    target.write_text(GLYPH, encoding="utf-8")
+def main():
+    out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR") or "/output"
+    os.makedirs(out_dir, exist_ok=True)
+    with open(os.path.join(out_dir, "entry.txt"), "wb") as fh:
+        fh.write(ENTRY.encode("utf-8"))
 
 
 if __name__ == "__main__":
